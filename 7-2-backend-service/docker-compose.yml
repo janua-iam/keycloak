@@ -1,0 +1,26 @@
+version: '3.3'
+
+
+services:
+  keycloak.fbi.com:
+    image: "quay.io/keycloak/keycloak:21.0.2"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HTTP_PORT: 8180
+    entrypoint: /bin/bash
+    command: -c "/opt/keycloak/bin/kc.sh start-dev"
+    ports:
+      - "127.0.0.1:8180:8180"
+    volumes:
+      - ./providers/:/opt/keycloak/providers/
+      - ../keycloak-data:/opt/keycloak/data
+
+  backend.fbi.com:
+    image: "maven"
+    volumes:
+      - ./security-keycloak-authorization-quickstart/:/usr/src/mymaven/
+    ports:
+      - "127.0.0.1:8080:8080"
+    working_dir: /usr/src/mymaven
+    command: mvn quarkus:dev

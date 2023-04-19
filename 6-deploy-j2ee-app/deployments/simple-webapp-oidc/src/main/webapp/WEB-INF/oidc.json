@@ -1,0 +1,11 @@
+{
+    "client-id" : "wildfly",
+    "provider-url" : "http://keycloak.fbi.com:8180/realms/demo",
+    "public-client" : "false",
+    "credentials" : {
+        "secret" : "5ddv0rHMO2hPa4V0k8WNVAADrhl44CjK"
+    }, 
+    "principal-attribute" : "preferred_username",
+    "ssl-required" : "EXTERNAL"
+}
+
